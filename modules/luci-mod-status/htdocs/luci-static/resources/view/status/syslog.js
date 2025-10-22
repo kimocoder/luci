@@ -1,4 +1,7 @@
 'use strict';
-'require tools.views as views';
+'require view';
+'require fs';
+'require poll';
+'require ui';
 
 return views.LogreadBox(null, _('System Log'));

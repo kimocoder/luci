@@ -3,7 +3,6 @@
 		"title": "Switch",
 		"order": 20,
 		"action": {
-			"type": "view",
 			"path": "network/switch"
 		},
 		"depends": {
@@ -59,7 +58,7 @@
 	},
 
 	"admin/network/dhcp": {
-		"title": "DHCP",
+		"title": "DHCP and DNS",
 		"order": 40,
 		"action": {
 			"type": "view",

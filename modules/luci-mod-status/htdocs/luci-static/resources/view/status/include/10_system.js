@@ -2,13 +2,6 @@
 'require baseclass';
 'require fs';
 'require rpc';
-'require uci';
-
-var callGetUnixtime = rpc.declare({
-	object: 'luci',
-	method: 'getUnixtime',
-	expect: { result: 0 }
-});
 
 var callLuciVersion = rpc.declare({
 	object: 'luci',
@@ -25,6 +18,26 @@ var callSystemInfo = rpc.declare({
 	method: 'info'
 });
 
+var callCPUBench = rpc.declare({
+	object: 'luci',
+	method: 'getCPUBench'
+});
+
+var callCPUInfo = rpc.declare({
+	object: 'luci',
+	method: 'getCPUInfo'
+});
+
+var callCPUUsage = rpc.declare({
+	object: 'luci',
+	method: 'getCPUUsage'
+});
+
+var callTempInfo = rpc.declare({
+	object: 'luci',
+	method: 'getTempInfo'
+});
+
 return baseclass.extend({
 	title: _('System'),
 
@@ -32,40 +45,44 @@ return baseclass.extend({
 		return Promise.all([
 			L.resolveDefault(callSystemBoard(), {}),
 			L.resolveDefault(callSystemInfo(), {}),
-			L.resolveDefault(callLuciVersion(), { revision: _('unknown version'), branch: 'LuCI' }),
-			L.resolveDefault(callGetUnixtime(), 0),
-			uci.load('system')
+			L.resolveDefault(callCPUBench(), {}),
+			L.resolveDefault(callCPUInfo(), {}),
+			L.resolveDefault(callCPUUsage(), {}),
+			L.resolveDefault(callTempInfo(), {}),
+			L.resolveDefault(callLuciVersion(), { revision: _('unknown version'), branch: 'LuCI' })
 		]);
 	},
 
 	render: function(data) {
 		var boardinfo   = data[0],
 		    systeminfo  = data[1],
-		    luciversion = data[2],
-		    unixtime    = data[3];
+		    cpubench    = data[2],
+		    cpuinfo     = data[3],
+		    cpuusage    = data[4],
+		    tempinfo    = data[5],
+		    luciversion = data[6];
 
 		luciversion = luciversion.branch + ' ' + luciversion.revision;
 
 		var datestr = null;
 
-		if (unixtime) {
-			var date = new Date(unixtime * 1000),
-				zn = uci.get('system', '@system[0]', 'zonename')?.replaceAll(' ', '_') || 'UTC',
-				ts = uci.get('system', '@system[0]', 'clock_timestyle') || 0,
-				hc = uci.get('system', '@system[0]', 'clock_hourcycle') || 0;
+		if (systeminfo.localtime) {
+			var date = new Date(systeminfo.localtime * 1000);
 
-			datestr = new Intl.DateTimeFormat(undefined, {
-				dateStyle: 'medium',
-				timeStyle: (ts == 0) ? 'long' : 'full',
-				hourCycle: (hc == 0) ? undefined : hc,
-				timeZone: zn
-			}).format(date);
+			datestr = '%04d-%02d-%02d %02d:%02d:%02d'.format(
+				date.getUTCFullYear(),
+				date.getUTCMonth() + 1,
+				date.getUTCDate(),
+				date.getUTCHours(),
+				date.getUTCMinutes(),
+				date.getUTCSeconds()
+			);
 		}
 
 		var fields = [
 			_('Hostname'),         boardinfo.hostname,
-			_('Model'),            boardinfo.model,
-			_('Architecture'),     boardinfo.system,
+			_('Model'),            boardinfo.model + cpubench.cpubench,
+			_('Architecture'),     cpuinfo.cpuinfo || boardinfo.system,
 			_('Target Platform'),  (L.isObject(boardinfo.release) ? boardinfo.release.target : ''),
 			_('Firmware Version'), (L.isObject(boardinfo.release) ? boardinfo.release.description + ' / ' : '') + (luciversion || ''),
 			_('Kernel Version'),   boardinfo.kernel,
@@ -75,8 +92,14 @@ return baseclass.extend({
 				systeminfo.load[0] / 65535.0,
 				systeminfo.load[1] / 65535.0,
 				systeminfo.load[2] / 65535.0
-			) : null
+			) : null,
+			_('CPU usage (%)'),    cpuusage.cpuusage
 		];
+
+		if (tempinfo.tempinfo) {
+			fields.splice(6, 0, _('Temperature'));
+			fields.splice(7, 0, tempinfo.tempinfo);
+		}
 
 		var table = E('table', { 'class': 'table' });
 

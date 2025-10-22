@@ -39,12 +39,12 @@ return view.extend({
 	load() {
 		return Promise.all([
 			callNetworkInterfaceDump(),
-			L.resolveDefault(fs.exec('/sbin/ip', [ '-4', 'neigh', 'show' ]), { stdout: '' }),
-			L.resolveDefault(fs.exec('/sbin/ip', [ '-4', 'route', 'show', 'table', 'all' ]), { stdout: '' }),
-			L.resolveDefault(fs.exec('/sbin/ip', [ '-4', 'rule', 'show' ]), { stdout: '' }),
-			L.resolveDefault(fs.exec('/sbin/ip', [ '-6', 'neigh', 'show' ]), { stdout: '' }),
-			L.resolveDefault(fs.exec('/sbin/ip', [ '-6', 'route', 'show', 'table', 'all' ]), { stdout: '' }),
-			L.resolveDefault(fs.exec('/sbin/ip', [ '-6', 'rule', 'show' ]), { stdout: '' }),
+			L.resolveDefault(fs.exec('/sbin/ip', [ '-4', 'neigh', 'show' ]), {}),
+			L.resolveDefault(fs.exec('/sbin/ip', [ '-4', 'route', 'show', 'table', 'all' ]), {}),
+			L.resolveDefault(fs.exec('/sbin/ip', [ '-4', 'rule', 'show' ]), {}),
+			L.resolveDefault(fs.exec('/sbin/ip', [ '-6', 'neigh', 'show' ]), {}),
+			L.resolveDefault(fs.exec('/sbin/ip', [ '-6', 'route', 'show', 'table', 'all' ]), {}),
+			L.resolveDefault(fs.exec('/sbin/ip', [ '-6', 'rule', 'show' ]), {}),
 			L.hasSystemFeature('ufpd') ? callUfpList() : null
 		]);
 	},
@@ -81,7 +81,6 @@ return view.extend({
 	},
 
 	parseNeighbs(nbs, macs, networks, v6) {
-		if (!nbs) return [];
 		const res = [];
 
 		for (const line of nbs.trim().split(/\n/)) {
@@ -116,7 +115,6 @@ return view.extend({
 	},
 
 	parseRoutes(routes, networks, v6) {
-		if (!routes) return [];
 		const res = [];
 
 		for (const line of routes.trim().split(/\n/)) {
@@ -147,7 +145,7 @@ return view.extend({
 		return res;
 	},
 
-	parseRules: rules => rules?.trim()?.split('\n')?.map(l => {
+	parseRules: rules => rules.trim().split('\n').map(l => {
 		const [, prio=null, rule=null] = l.match(/^(\d+):\s+(.+)$/) || [];
 		return [prio, rule];
 	}),

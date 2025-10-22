@@ -117,7 +117,7 @@ function removeKey(ev) {
 }
 
 function isPemFormat(content) {
-	return new RegExp('-BEGIN ([A-Z ]+)?PUBLIC KEY-').test(content);
+	return /-BEGIN ([A-Z ]+)?PUBLIC KEY-/.test(content);
 }
 
 function keyEnvironmentCheck(key) {

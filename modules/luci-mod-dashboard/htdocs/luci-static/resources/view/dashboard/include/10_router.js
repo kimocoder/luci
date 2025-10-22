@@ -3,7 +3,6 @@
 'require fs';
 'require rpc';
 'require network';
-'require uci';
 
 var callSystemBoard = rpc.declare({
 	object: 'system',
@@ -15,12 +14,6 @@ var callSystemInfo = rpc.declare({
 	method: 'info'
 });
 
-var callGetUnixtime = rpc.declare({
-	object: 'luci',
-	method: 'getUnixtime',
-	expect: { result: 0 }
-});
-
 return baseclass.extend({
 
 	params: [],
@@ -30,9 +23,7 @@ return baseclass.extend({
 			network.getWANNetworks(),
 			network.getWAN6Networks(),
 			L.resolveDefault(callSystemBoard(), {}),
-			L.resolveDefault(callSystemInfo(), {}),
-			L.resolveDefault(callGetUnixtime(), 0),
-			uci.load('system')
+			L.resolveDefault(callSystemInfo(), {})
 		]);
 	},
 
@@ -307,22 +298,20 @@ return baseclass.extend({
 
 		const boardinfo   = data[2];
 		const systeminfo  = data[3];
-		const unixtime    = data[4];
 
 		let datestr = null;
 
-		if (unixtime) {
-			const date = new Date(unixtime * 1000);
-			const zn = uci.get('system', '@system[0]', 'zonename')?.replaceAll(' ', '_') || 'UTC';
-			const ts = uci.get('system', '@system[0]', 'clock_timestyle') || 0;
-			const hc = uci.get('system', '@system[0]', 'clock_hourcycle') || 0;
+		if (systeminfo.localtime) {
+			const date = new Date(systeminfo.localtime * 1000);
 
-			datestr = new Intl.DateTimeFormat(undefined, {
-				dateStyle: 'medium',
-				timeStyle: (ts == 0) ? 'long' : 'full',
-				hourCycle: (hc == 0) ? undefined : hc,
-				timeZone: zn
-			}).format(date);
+			datestr = '%04d-%02d-%02d %02d:%02d:%02d'.format(
+				date.getUTCFullYear(),
+				date.getUTCMonth() + 1,
+				date.getUTCDate(),
+				date.getUTCHours(),
+				date.getUTCMinutes(),
+				date.getUTCSeconds()
+			);
 		}
 
 		this.params.router = {

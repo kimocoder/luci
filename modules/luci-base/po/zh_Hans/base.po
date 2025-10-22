@@ -4,8 +4,9 @@
 #
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-10-20 06:43+0000\n"
-"Last-Translator: nKsyn <e.nksyn@gmail.com>\n"
+"PO-Revision-Date: 2025-10-07 07:27+0000\n"
+"Last-Translator: 大王叫我来巡山 "
+"<hamburger2048@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/openwrt/luci/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -2379,7 +2380,7 @@ msgstr "创建接口"
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/syslog.js:47
 #: modules/luci-mod-system/htdocs/luci-static/resources/view/system/system.js:191
 msgid "Critical"
-msgstr "关键"
+msgstr "严重"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/syslog.js:26
 msgid "Cron"
@@ -3096,7 +3097,7 @@ msgstr "禁止分片"
 
 #: modules/luci-compat/luasrc/view/cbi/tblsection.htm:152
 msgid "Down"
-msgstr "↓"
+msgstr "早期日志在前"
 
 #: modules/luci-base/htdocs/luci-static/resources/ui.js:3223
 msgid "Download"
@@ -7426,7 +7427,7 @@ msgstr "备注"
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/syslog.js:50
 #: modules/luci-mod-system/htdocs/luci-static/resources/view/system/system.js:188
 msgid "Notice"
-msgstr "通知"
+msgstr "注意"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/diagnostics.js:135
 msgid "Nslookup"
@@ -8072,13 +8073,13 @@ msgstr "从属接口的数据包数"
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js:295
 msgid "Part of network:"
 msgid_plural "Part of networks:"
-msgstr[0] "网络的一部分："
+msgstr[0] "属于以下网络："
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:140
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:1324
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js:263
 msgid "Part of zone %q"
-msgstr "区域 %q"
+msgstr "属于区域 %q"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/tools/network.js:560
 msgctxt "MACVLAN mode"
@@ -8333,7 +8334,7 @@ msgstr "端口 %d"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js:297
 msgid "Port is not part of any network"
-msgstr "端口不是任何一个网络的一部分"
+msgstr "端口不属于任何网络"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/tools/network.js:1235
 msgid "Port isolation"
@@ -8764,11 +8765,11 @@ msgstr "接收"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js:247
 msgid "Receive dropped"
-msgstr "接收被丢弃"
+msgstr "接收丢弃"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js:246
 msgid "Receive errors"
-msgstr "接收出错"
+msgstr "接收错误"
 
 #: protocols/luci-proto-wireguard/htdocs/luci-static/resources/view/wireguard/status.js:57
 msgid "Received Data"
@@ -8776,15 +8777,15 @@ msgstr "已接收的数据"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js:243
 msgid "Received bytes"
-msgstr "接收到的字节数"
+msgstr "接收字节"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js:245
 msgid "Received multicast"
-msgstr "接收到的多播"
+msgstr "接收组播"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js:244
 msgid "Received packets"
-msgstr "接收到的数据包"
+msgstr "接收数据包"
 
 #: protocols/luci-proto-wireguard/htdocs/luci-static/resources/protocol/wireguard.js:167
 msgid "Recommended. IP addresses of the WireGuard interface."
@@ -9219,7 +9220,7 @@ msgstr "反转路径过滤器"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/dmesg.js:271
 msgid "Reverse sort"
-msgstr "倒序"
+msgstr "反向排序"
 
 #: modules/luci-base/htdocs/luci-static/resources/ui.js:4849
 msgid "Revert"
@@ -10125,7 +10126,7 @@ msgstr "在此指定密钥。"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js:215
 msgid "Speed: %d Mibit/s, Duplex: %s"
-msgstr "速度： %d Mibit/s, 双工： %s"
+msgstr "速率： %d Mibit/s, 双工模式： %s"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:1666
 msgid "Splitterless ADSL (G.992.2) Annex A"
@@ -10516,7 +10517,8 @@ msgstr "<em>受管地址配置</em> (M) 标记表明可以通过 DHCPv6 获取 I
 msgid ""
 "The <em>Mobile IPv6 Home Agent</em> (H) flag indicates that the device is "
 "also acting as Mobile IPv6 home agent on this link."
-msgstr "<em>移动 IPv6 归属代理</em> (H) 标记表明该设备在此链路上还充当移动 IPv6 归属"
+msgstr ""
+"<em>移动 IPv6 家乡代理</em> (H) 标记表明该设备在此链路上还充当移动 IPv6 家乡"
 "代理。"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:826
@@ -11323,7 +11325,7 @@ msgstr "传送"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js:252
 msgid "Transmit dropped"
-msgstr "传输被丢弃"
+msgstr "传输丢弃"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js:251
 msgid "Transmit errors"
@@ -11339,11 +11341,11 @@ msgstr "已传输的数据"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js:249
 msgid "Transmitted bytes"
-msgstr "已传输字节数"
+msgstr "已传输字节"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js:250
 msgid "Transmitted packets"
-msgstr "已传输的数据包"
+msgstr "已传输数据包"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/nftables.js:79
 msgctxt "nft @th,off,len"
@@ -11657,7 +11659,7 @@ msgstr "无标题的对端"
 
 #: modules/luci-compat/luasrc/view/cbi/tblsection.htm:151
 msgid "Up"
-msgstr "↑"
+msgstr "近期日志在前"
 
 #: modules/luci-base/htdocs/luci-static/resources/ui.js:4648
 msgid "Upload"
@@ -12388,7 +12390,7 @@ msgstr ""
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/dmesg.js:268
 msgid "and above"
-msgstr "及以上"
+msgstr "和上面"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/dmesg.js:260
 msgid "and:"
@@ -12434,7 +12436,7 @@ msgstr "baseT"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/dmesg.js:258
 msgid "between:"
-msgstr "介于："
+msgstr "中间："
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:1749
 msgid "bridged"
@@ -12685,7 +12687,7 @@ msgstr "分钟"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:827
 msgid "mobile home agent (H)"
-msgstr "移动归属代理 (H)"
+msgstr "移动家乡代理 (H)"
 
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/interfaces.js:47
 msgid "no"
@@ -13134,6 +13136,27 @@ msgstr "{example_nx} 返回 {nxdomain}。"
 #: modules/luci-compat/luasrc/view/cbi/delegator.htm:20
 msgid "« Back"
 msgstr "« 后退"
+
+msgid "802.11n 2.4Ghz Only"
+msgstr "只适合 802.11n 2.4Ghz"
+
+msgid "DNS redirect"
+msgstr "DNS 重定向"
+
+msgid "Enable 256-QAM"
+msgstr "启用 256-QAM"
+
+msgid "Force redirect all local DNS queries to DNSMasq, a.k.a. DNS Hijacking."
+msgstr "强制将所有本地 DNS 查询重定向到 DNSMasq，即 DNS 劫持。"
+
+msgid "Online Users"
+msgstr "在线用户数"
+
+msgid "Quectel Cellular"
+msgstr "移远蜂窝网络"
+
+msgid "Temperature"
+msgstr "温度"
 
 #~ msgid ""
 #~ "DHCPv4 <code>leasetime</code> is used as limit and preferred lifetime of "

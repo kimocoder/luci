@@ -13,7 +13,6 @@ return view.extend({
 		include.hide = !include.hide;
 
 		btn.setAttribute('data-style', include.hide ? 'active' : 'inactive');
-		btn.setAttribute('class', include.hide ? 'label notice' : 'label');
 		btn.firstChild.data = include.hide ? _('Show') : _('Hide');
 		btn.blur();
 
@@ -132,7 +131,6 @@ return view.extend({
 					title != '' ? E('h3', title) : '',
 					E('div', [
 						E('span', {
-							'class': includes[i].hide ? 'label notice' : 'label',
 							'data-style': includes[i].hide ? 'active' : 'inactive',
 							'data-indicator': 'poll-status',
 							'data-clickable': 'true',

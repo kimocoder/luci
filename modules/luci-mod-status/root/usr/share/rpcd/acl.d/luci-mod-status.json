@@ -3,7 +3,7 @@
 		"description": "Grant access to realtime statistics",
 		"read": {
 			"ubus": {
-				"luci": [ "getConntrackList", "getRealtimeStats" ],
+				"luci": [ "getConntrackList", "getRealtimeStats", "getCPUBench", "getCPUUsage", "getOnlineUsers" ],
 				"network.rrdns": [ "lookup" ]
 			}
 		}
@@ -31,10 +31,11 @@
 		"read": {
 			"cgi-io": [ "exec" ],
 			"file": {
-				"/bin/dmesg -r": [ "exec" ]
+				"/bin/dmesg -r": [ "exec" ],
+				"/usr/libexec/syslog-wrapper": [ "exec" ]
 			},
 			"ubus": {
-				"log": [ "read" ]
+				"file": [ "stat" ]
 			}
 		}
 	},

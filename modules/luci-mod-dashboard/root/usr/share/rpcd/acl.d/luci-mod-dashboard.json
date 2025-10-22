@@ -16,7 +16,6 @@
 			},
 			"ubus": {
 				"file": [ "list", "read" ],
-				"luci": [ "getUnixtime" ],
 				"system": [ "board", "info" ]
 			}
 		}

@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 LUCI_TITLE:=LuCI Battery Status
 LUCI_DESCRIPTION:=Provides a battery charge indicator in LuCI.
 
-LUCI_DEPENDS:=+luci-base +libi2c +i2c-tools
+LUCI_DEPENDS:=+luci-base
 
 PKG_LICENSE:=Apache-2.0
 
